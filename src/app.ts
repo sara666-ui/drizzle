@@ -3,7 +3,6 @@ import cookieParser from "cookie-parser";
 const app = express()
 import productRouter from './routes/products/index.js'
 import authRouter from './routes/auth/index.js'
-import serverless from 'serverless-http';
 
 
 const port = process.env.PORT || 3000
@@ -19,10 +18,7 @@ app.get('/', (req, res) => {
 app.use("/product", productRouter)
 app.use("/auth", authRouter);
 
-if (process.env.NODE_ENV === 'dev') {
-    app.listen(port, () => {
-        console.log(`Example app listening on http://localhost:${port}`)
-    })
-}
 
-export const handler = serverless(app);
+app.listen(port, () => {
+    console.log(`Example app listening on http://localhost:${port}`)
+})
